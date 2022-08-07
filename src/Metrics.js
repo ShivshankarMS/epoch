@@ -34,7 +34,6 @@ function Metrics() {
                 const { value, done } = await reader.read()
                 if (done) break;
                 let metricsList = new TextDecoder().decode(value).split('\n')
-                debugger
                 let metricMap = metricsList.filter((ele) => {
                     if (ele[0] !== '#' && defaultMetricNamesList.includes(ele.split(' ')[0])) {
                         return true;
@@ -42,9 +41,7 @@ function Metrics() {
                         return false;
                     }
                 })
-                console.log(metricMap)
                 setDefaultMetricsDataList(metricMap)
-                // setEpochInSec(jsonString)
             }
         }
         fetchEpocData()
@@ -52,23 +49,26 @@ function Metrics() {
 
     return (
         <table>
-            <tr>
-                <th>Metric Name</th>
-                <th>Value</th>
-            </tr>
-            {
-                defaultMetricsDataList.map((ele, idx) => {
-                    let list = ele.split(' ')
-                    return (
-                        <tr key={idx}>
-                            <td>{list[0]}</td>
-                            <td>{list[1]}</td>
-                        </tr>
-                    )
-                })
-            }
+            <thead>
+                <tr>
+                    <th>Metric Name</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    defaultMetricsDataList.map((ele, idx) => {
+                        let list = ele.split(' ')
+                        return (
+                            <tr key={idx}>
+                                <td>{list[0]}</td>
+                                <td>{list[1]}</td>
+                            </tr>
+                        )
+                    })
+                }
+            </tbody>
         </table>
-
     );
 }
 

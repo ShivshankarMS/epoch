@@ -1,9 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react'
 
 function Epoch() {
-    const [epochInSec, setEpochInSec] = useState(0)
+    const [epochInSec, setEpochInSec] = useState(0);
+    const [browserTimeInSec, setBrowserTimeInSec] = useState(0);
     useEffect(() => {
         async function fetchEpocData() {
             const headers = new Headers({
@@ -26,10 +26,25 @@ function Epoch() {
         fetchEpocData()
     }, [])
 
+    useEffect(() => {
+        let timer1 = setTimeout(() => setBrowserTimeInSec(Math.round(new Date().getTime() / 1000)), 1000);
+        return () => {
+            clearTimeout(timer1);
+        };
+    }, [browserTimeInSec])
+    let diff = (browserTimeInSec - epochInSec)
+    let timeFormat = new Date(diff * 1000).toISOString().substr(11, 8)
     return (
-        <>
-            {epochInSec}
-        </>
+        <div className="grid-container">
+            <div className="grid-item">
+                <h1>Server Epoch:</h1>
+                {new Date(epochInSec * 1000).toTimeString().split(' ')[0]}
+            </div>
+            <div className="grid-item">
+                <h1>Difference with Server Epoch:</h1>
+                {timeFormat}
+            </div>
+        </div>
     );
 }
 
