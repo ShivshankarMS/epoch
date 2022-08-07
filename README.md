@@ -1,9 +1,9 @@
 1.  Please clone this git repo - [https://github.com/ShivshankarMS/epoch.git](https://github.com/ShivshankarMS/epoch.git)
 2.  Run _npm install_
 3.  Run _npm start_
-4.  Another terminal Window, run this command - _node src/server/index.js_ or _nodemon src/server/index.js_
+4.  In Another terminal Window, run this command - _node src/server/index.js_ or _nodemon src/server/index.js_
 5.  You will see your awesome application on your browser - _http://localhost:3000/_
-6.  Verify 403 errors, copy and paste this into the browser address bar -  *http://localhost:3001/time & http://localhost:3001/metrics*
+6.  To Verify 403 errors, copy and paste this into the browser address bar -  *http://localhost:3001/time & http://localhost:3001/metrics*
 
 # Getting Started with Create React App
 
