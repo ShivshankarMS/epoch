@@ -1,9 +1,16 @@
 const express = require('express');
 const validate = require('jsonschema').validate;
 const promMid = require('express-prometheus-middleware');
+const cors = require('cors');
 
 const app = express();
 app.use(express.static('dist'));
+
+const corsOption = {
+    origin: ['http://localhost:3000'],
+};
+
+app.use(cors(corsOption));
 
 //403 will be written if there is no authorization header in the request body
 app.use(function (req, res, next) {
