@@ -1,9 +1,9 @@
-import './App.css';
 import { useState, useEffect } from 'react'
 
 function Epoch() {
     const [epochInSec, setEpochInSec] = useState(0);
     const [browserTimeInSec, setBrowserTimeInSec] = useState(0);
+    const [runAfter30Sec, setRunAfter30Sec] = useState(0);
     useEffect(() => {
         async function fetchEpocData() {
             const headers = new Headers({
@@ -23,8 +23,12 @@ function Epoch() {
                 setEpochInSec(epocObject.epoch)
             }
         }
-        fetchEpocData()
-    }, [])
+        fetchEpocData();
+        let epochTimer = setTimeout(() => setRunAfter30Sec(runAfter30Sec + 1), 30000);
+        return () => {
+            clearTimeout(epochTimer);
+        };
+    }, [runAfter30Sec])
 
     useEffect(() => {
         let timer1 = setTimeout(() => setBrowserTimeInSec(Math.round(new Date().getTime() / 1000)), 1000);

@@ -1,6 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 function Metrics() {
     const [defaultMetricsDataList, setDefaultMetricsDataList] = useState([]);
@@ -20,7 +18,7 @@ function Metrics() {
         'nodejs_eventloop_lag_p99_seconds',
     ]
     useEffect(() => {
-        async function fetchEpocData() {
+        async function fetchMetricsData() {
             const headers = new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + 'mysecrettoken',
@@ -44,7 +42,7 @@ function Metrics() {
                 setDefaultMetricsDataList(metricMap)
             }
         }
-        fetchEpocData()
+        fetchMetricsData();
     }, [])
 
     return (
